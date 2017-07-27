@@ -1,0 +1,41 @@
+<Files *.js>
+SetOutputFilter DEFLATE
+</Files>
+<Files *.css>
+SetOutputFilter DEFLATE
+</Files>
+
+# 480 weeks
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|mp4)$">
+#Header set Cache-Control "max-age=290304000, public"
+</FilesMatch>
+ 
+# 2 DAYS
+<FilesMatch "\.(xml|txt)$">
+#Header set Cache-Control "max-age=172800, public, must-revalidate"
+</FilesMatch>
+ 
+# 2 HOURS
+<FilesMatch "\.(html|htm)$">
+#Header set Cache-Control "max-age=7200, must-revalidate"
+</FilesMatch>
+
+#ErrorDocument 404 http://www.
+
+
+#AddDefaultCharset ISO-8859-1
+#AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+#RewriteBase /intercambioschidos/proyecto/
+#RewriteBase /
+RewriteBase /proyectos/intercambiosqualtop/proyecto/
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^([^/]+)$ index.php?view=$1
+RewriteRule ^mi-equipo/([^/]+)$ index.php?view=mi-equipo&id=$1
+RewriteRule ^integrantes/([^/]+)$ index.php?view=integrantes&id=$1
+RewriteRule ^sorteo-equipo/([^/]+)$ index.php?view=sorteo-equipo&id=$1
+</IfModule>
